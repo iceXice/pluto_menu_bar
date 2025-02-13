@@ -28,6 +28,7 @@ class PlutoMenuBar extends StatefulWidget {
 
   /// BackgroundColor. (default. 'white')
   final Color backgroundColor;
+  final Color backgroundColorForItem;
 
   /// Border color. (default. 'black12')
   final Color borderColor;
@@ -47,6 +48,7 @@ class PlutoMenuBar extends StatefulWidget {
     this.showBackButton = true,
     this.height = 45,
     this.backgroundColor = Colors.white,
+    this.backgroundColorForItem = Colors.white,
     this.borderColor = Colors.black12,
     this.itemStyle = const PlutoMenuItemStyle(),
     this.mode = PlutoMenuBarMode.tap,
@@ -122,7 +124,7 @@ class _PlutoMenuBarState extends State<PlutoMenuBar> {
                     goBackButtonText: widget.goBackButtonText,
                     showBackButton: widget.showBackButton,
                     height: widget.height,
-                    backgroundColor: widget.backgroundColor,
+                    backgroundColor: widget.backgroundColorForItem,
                     style: widget.itemStyle,
                     mode: widget.mode,
                     selectedMenuKey: _selectedMenuKey,
