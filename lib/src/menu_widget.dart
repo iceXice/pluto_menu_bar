@@ -221,7 +221,7 @@ class _MenuWidgetState extends State<_MenuWidget> {
               child: PhysicalModel(
                 color: widget.backgroundColor,
                 borderRadius: widget.borderRadius,
-                elevation: 2.0,
+                elevation: 4.0,
                 child: MouseRegion(
                   onHover: onHover,
                   onExit: onExit,
