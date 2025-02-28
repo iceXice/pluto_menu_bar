@@ -176,8 +176,9 @@ class _MenuWidgetState extends State<_MenuWidget> {
             onPressed: item.onTap,
             style: TextButton.styleFrom(
               textStyle: widget.style.textStyle,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
+              shape: RoundedRectangleBorder(
+                ///鼠标经过时候item的颜色  , 带圆角
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
             child: Padding(padding: padding, child: menuItemWidget),
