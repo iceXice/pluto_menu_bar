@@ -42,6 +42,8 @@ class PlutoMenuBar extends StatefulWidget {
   /// [PlutoMenuBarMode.hover] Opens a submenu by hovering the mouse.
   final PlutoMenuBarMode mode;
 
+  BorderRadius? borderRadius;
+
   PlutoMenuBar({
     required this.menus,
     this.goBackButtonText = 'Go back',
@@ -52,6 +54,7 @@ class PlutoMenuBar extends StatefulWidget {
     this.borderColor = Colors.black12,
     this.itemStyle = const PlutoMenuItemStyle(),
     this.mode = PlutoMenuBarMode.tap,
+    this.borderRadius,
   }) : assert(menus.length > 0);
 
   @override
@@ -127,6 +130,7 @@ class _PlutoMenuBarState extends State<PlutoMenuBar> {
                     backgroundColor: widget.backgroundColorForItem,
                     style: widget.itemStyle,
                     mode: widget.mode,
+                    borderRadius: widget.borderRadius,
                     selectedMenuKey: _selectedMenuKey,
                     setSelectedMenuKey: _setSelectedMenuKey,
                   );

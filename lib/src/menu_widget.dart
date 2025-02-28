@@ -11,14 +11,15 @@ class _MenuWidget extends StatefulWidget {
 
   final Color backgroundColor;
 
+  BorderRadius? borderRadius;
+
   final PlutoMenuItemStyle style;
 
   final PlutoMenuBarMode mode;
 
   final GlobalKey<State<StatefulWidget>>? selectedMenuKey;
 
-  final void Function(GlobalKey<State<StatefulWidget>>? key)?
-      setSelectedMenuKey;
+  final void Function(GlobalKey<State<StatefulWidget>>? key)? setSelectedMenuKey;
 
   _MenuWidget(
     this.menu, {
@@ -28,6 +29,7 @@ class _MenuWidget extends StatefulWidget {
     required this.backgroundColor,
     required this.style,
     required this.mode,
+    this.borderRadius,
     this.selectedMenuKey,
     this.setSelectedMenuKey,
   }) : super(key: menu._key);
@@ -45,19 +47,14 @@ class _MenuWidgetState extends State<_MenuWidget> {
 
   bool get enabledSelectedTopMenu => widget.style.enableSelectedTopMenu;
 
-  bool get isSelectedMenu =>
-      enabledSelectedTopMenu && widget.selectedMenuKey == widget.menu.key;
+  bool get isSelectedMenu => enabledSelectedTopMenu && widget.selectedMenuKey == widget.menu.key;
 
   Color get iconColor {
-    return isSelectedMenu
-        ? widget.style.selectedTopMenuIconColor
-        : widget.style.iconColor;
+    return isSelectedMenu ? widget.style.selectedTopMenuIconColor : widget.style.iconColor;
   }
 
   TextStyle get textStyle {
-    return isSelectedMenu
-        ? widget.style.selectedTopMenuTextStyle
-        : widget.style.textStyle;
+    return isSelectedMenu ? widget.style.selectedTopMenuTextStyle : widget.style.textStyle;
   }
 
   @override
@@ -104,16 +101,14 @@ class _MenuWidgetState extends State<_MenuWidget> {
     if (_popups.containsKey(menu._key.toString())) return;
     if (!menu._hasContext) return;
 
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
 
     const double itemMinWidth = 150.0;
     const double itemMinHeight = 43.0;
     final Offset menuPosition = menu._position - Offset(0, 1);
     final Size menuSize = menu._size;
     final bool rootMenu = menu._parent == null;
-    final Offset positionOffset =
-        rootMenu ? Offset(0, widget.height) : Offset(menuSize.width - 10, 10);
+    final Offset positionOffset = rootMenu ? Offset(0, widget.height) : Offset(menuSize.width - 10, 10);
 
     Offset position = menuPosition + positionOffset;
     double? top = position.dy;
@@ -224,6 +219,7 @@ class _MenuWidgetState extends State<_MenuWidget> {
               ),
               child: PhysicalModel(
                 color: widget.backgroundColor,
+                borderRadius: widget.borderRadius,
                 elevation: 2.0,
                 child: MouseRegion(
                   onHover: onHover,
@@ -266,11 +262,9 @@ class _MenuWidgetState extends State<_MenuWidget> {
       items.add(backButton);
     }
 
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
 
-    final Offset position =
-        widget.menu._position + Offset(0, widget.height - 1);
+    final Offset position = widget.menu._position + Offset(0, widget.height - 1);
 
     showMenu(
       context: context,
@@ -365,9 +359,7 @@ class _MenuWidgetState extends State<_MenuWidget> {
     if (widget.style.selectedTopMenuResolver != null) {
       resolved = widget.style.selectedTopMenuResolver!(
         widget.menu,
-        widget.selectedMenuKey == null
-            ? null
-            : widget.menu.key == widget.selectedMenuKey,
+        widget.selectedMenuKey == null ? null : widget.menu.key == widget.selectedMenuKey,
       );
     }
 
